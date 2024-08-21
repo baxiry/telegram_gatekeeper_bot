@@ -140,14 +140,14 @@ func handleStartCommand(bot *tb.Bot, c tb.Context, groupUsername string) {
 	}
 
 	// Start the verification process
-	verificationMessage := fmt.Sprintf("جار التحقق من دخولك إلى مجموعة 🔍: [%s](https://t.me/%s)", groupChat.Title, groupChat.Username)
-	bot.Send(user, verificationMessage, &tb.SendOptions{ParseMode: tb.ModeMarkdownV2, DisableWebPagePreview: true})
+	verificationMessage := fmt.Sprintf("  جار التحقق من دخولك إلى مجموعة 🔍: [%s](https://t.me/%s)", groupChat.Title, groupChat.Username)
 	bot.Send(user, "يرجى حل المسألة التالية خلال 15 ثانية.")
+	bot.Send(user, verificationMessage, &tb.SendOptions{ParseMode: tb.ModeMarkdownV2, DisableWebPagePreview: true})
 	// give user O2
 	time.Sleep(1 * time.Second)
 	// start the quiz
 	if askMathProblem(bot, user) {
-		bot.Send(user, "إجابة صحيحة! يمكنك الآن الانضمام إلى المجموعة.")
+		bot.Send(user, "إجابة صحيحة!  تم الانضمام  .")
 		// Remove restrictions
 		err = bot.Promote(groupChat, &tb.ChatMember{
 			User: user,
@@ -162,7 +162,7 @@ func handleStartCommand(bot *tb.Bot, c tb.Context, groupUsername string) {
 		}
 		welcomeUserToGroup(bot, groupChat, user)
 	} else {
-		bot.Send(user, "إجابة غير صحيحة! سيتم رفض طلبك للانضمام.")
+		bot.Send(user, "إجابة غير صحيحة! رُفض طلبك .")
 		// Kick the user without banning
 		err = bot.Unban(groupChat, user) // The third parameter defaults to false
 		if err != nil {
@@ -229,7 +229,7 @@ func askMathProblem(bot *tb.Bot, user *tb.User) bool {
 
 // welcomeUserToGroup sends a welcome message to the group.
 func welcomeUserToGroup(bot *tb.Bot, chat *tb.Chat, user *tb.User) {
-	welcomeMessage := fmt.Sprintf("سادتي وسيداتي رحبوا معنا بالوافد الجديد [%s](https://t.me/%s) لقد تم قبوله معنا 🤠🍉🎉", user.FirstName+user.LastName, user.Username)
+	welcomeMessage := fmt.Sprintf(" في المجموعة [%s](https://t.me/%s)  مرحبا بك ", user.FirstName+user.LastName, user.Username)
 	_, err := bot.Send(chat, welcomeMessage, &tb.SendOptions{ParseMode: tb.ModeMarkdownV2, DisableWebPagePreview: true})
 	if err != nil {
 		log.Println("Error sending welcoming markdown: ", err)
