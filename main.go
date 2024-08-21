@@ -229,7 +229,7 @@ func askMathProblem(bot *tb.Bot, user *tb.User) bool {
 
 // welcomeUserToGroup sends a welcome message to the group.
 func welcomeUserToGroup(bot *tb.Bot, chat *tb.Chat, user *tb.User) {
-	welcomeMessage := fmt.Sprintf(" في المجموعة [%s](https://t.me/%s)  مرحبا بك ", user.FirstName+user.LastName, user.Username)
+	welcomeMessage := fmt.Sprintf(" في المجموعة [%s](https://t.me/%s)  مرحبا بك ", user.FirstName, user.Username)
 	_, err := bot.Send(chat, welcomeMessage, &tb.SendOptions{ParseMode: tb.ModeMarkdownV2, DisableWebPagePreview: true})
 	if err != nil {
 		log.Println("Error sending welcoming markdown: ", err)
