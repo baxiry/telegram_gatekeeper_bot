@@ -62,9 +62,9 @@ func main() {
 
 		if args != "" {
 			handleStartCommand(bot, c, args)
-		} else {
-			bot.Send(c.Chat(), "/start GROUP_USER_NAME")
 		}
+		
+		bot.Send(c.Chat(), "/start GROUP_USER_NAME")
 		return nil
 	})
 
@@ -140,7 +140,7 @@ func handleStartCommand(bot *tb.Bot, c tb.Context, groupUsername string) {
 	}
 
 	// Start the verification process
-	verificationMessage := fmt.Sprintf("  جار التحقق من دخولك إلى مجموعة 🔍: [%s](https://t.me/%s)", groupChat.Title, groupChat.Username)
+	verificationMessage := fmt.Sprintf(" التحقق جار  🔍: [%s](https://t.me/%s)", groupChat.Title, groupChat.Username)
 	bot.Send(user, "يرجى حل المسألة التالية خلال 15 ثانية.")
 	bot.Send(user, verificationMessage, &tb.SendOptions{ParseMode: tb.ModeMarkdownV2, DisableWebPagePreview: true})
 	// give user O2
